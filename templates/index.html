@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Confissões nas Paróquias</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Horários de Confissão</h1>
+
+{% for dia, registros in dias.items() %}
+    <h2>{{ dia }}</h2>
+
+    {% if registros %}
+        <ul>
+        {% for r in registros %}
+            <li>
+                <strong>{{ r.paroquia }}</strong> — {{ r.local }}  
+                <br>Horário: {{ r.horario }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhuma confissão disponível.</p>
+    {% endif %}
+{% endfor %}
+
+</body>
+</html>
