@@ -1,27 +1,68 @@
+/* Fontes e reset */
 body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background: #fafafa;
-}
-
-h1 {
-    text-align: center;
-}
-
-h2 {
-    margin-top: 30px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: #F5F5F5;
     color: #333;
 }
 
-ul {
-    list-style: none;
-    padding-left: 0;
+/* Cabeçalho */
+header {
+    background: #8A1C1C;
+    color: white;
+    padding: 25px;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-size: 28px;
 }
 
-li {
+/* Bloco recolhível */
+.dia-bloco {
     background: white;
-    padding: 10px;
-    margin-bottom: 8px;
+    border: 1px solid #ddd;
     border-radius: 6px;
-    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    margin: 20px;
+    padding: 10px 15px;
+}
+
+/* Título do dia */
+.dia-titulo {
+    font-family: 'Merriweather', serif;
+    font-size: 22px;
+    color: #8A1C1C;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Hover no título */
+.dia-titulo:hover {
+    color: #B53030;
+}
+
+/* Lista */
+.lista-paroquias {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+/* Card de paróquia */
+.card {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-left: 4px solid #8A1C1C;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Rodapé */
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    background: #8A1C1C;
+    color: white;
+    font-size: 14px;
 }

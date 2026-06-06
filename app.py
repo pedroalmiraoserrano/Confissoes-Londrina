@@ -1,15 +1,38 @@
 from flask import Flask, render_template
 import pandas as pd
+import os
+print("FLASK RODANDO EM:", os.getcwd())
+print("LENDO ARQUIVO DE:", os.path.abspath("confissoes.xlsx"))
+
 
 app = Flask(__name__)
 
 def carregar_dados():
     df = pd.read_excel("confissoes.xlsx")
-    # Agrupa por dia da semana
-    dias = {}
-    for dia in df["dia_semana"].unique():
-        dias[dia] = df[df["dia_semana"] == dia].to_dict(orient="records")
+
+    # Normaliza nomes das colunas
+    df.columns = df.columns.str.strip()
+
+    dias_semana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"]
+
+    dias = {dia: [] for dia in dias_semana}
+
+    for _, row in df.iterrows():
+        paroquia = row["Paróquia"]
+        local = row["Local"]
+
+        for dia in dias_semana:
+            if dia in df.columns:
+                horario = row[dia]
+                if pd.notna(horario) and horario != "":
+                    dias[dia].append({
+                        "paroquia": paroquia,
+                        "local": local,
+                        "horario": horario
+                    })
+
     return dias
+
 
 @app.route("/")
 def index():

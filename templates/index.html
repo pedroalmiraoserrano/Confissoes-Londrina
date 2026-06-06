@@ -2,29 +2,38 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Confissões nas Paróquias</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confissões – Arquidiocese de Londrina</title>
+
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-<h1>Horários de Confissão</h1>
+<header>
+    Confissões – Arquidiocese de Londrina
+</header>
 
-{% for dia, registros in dias.items() %}
-    <h2>{{ dia }}</h2>
+<main>
+    {% for dia, lista in dias.items() %}
+    <details class="dia-bloco">
+        <summary class="dia-titulo">{{ dia }}</summary>
 
-    {% if registros %}
-        <ul>
-        {% for r in registros %}
-            <li>
-                <strong>{{ r.paroquia }}</strong> — {{ r.local }}  
-                <br>Horário: {{ r.horario }}
+        <ul class="lista-paroquias">
+            {% for item in lista %}
+            <li class="card">
+                <strong>{{ item.paroquia }}</strong><br>
+                <span>{{ item.local }}</span><br>
+                <span>Horário: {{ item.horario }}</span>
             </li>
-        {% endfor %}
+            {% endfor %}
         </ul>
-    {% else %}
-        <p>Nenhuma confissão disponível.</p>
-    {% endif %}
-{% endfor %}
-
+    </details>
+    {% endfor %}
+</main>
 </body>
 </html>
