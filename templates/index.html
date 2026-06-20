@@ -12,11 +12,56 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
+<script>
+function filtrar() {
+    const termo = document.getElementById("busca").value.toLowerCase();
+    const dias = document.querySelectorAll("details");
+
+    dias.forEach(dia => {
+        const cards = dia.querySelectorAll(".card");
+        let encontrou = false;
+
+        cards.forEach(card => {
+            const texto = card.innerText.toLowerCase();
+
+            if (texto.includes(termo)) {
+                card.style.display = "block";
+                encontrou = true;
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        // Caso 1: campo de busca está vazio → mostrar tudo recolhido
+        if (termo === "") {
+            dia.style.display = "block";
+            dia.open = false;   // recolhe tudo
+            cards.forEach(card => card.style.display = "block"); // restaura todos os cards
+            return;
+        }
+
+        // Caso 2: busca ativa → mostrar só dias com resultados e expandir
+        if (encontrou) {
+            dia.style.display = "block";
+            dia.open = true;    // expande automaticamente
+        } else {
+            dia.style.display = "none"; // esconde dias sem resultados
+            dia.open = false;
+        }
+    });
+}
+</script>
+
+
+
 <body>
 
 <header>
     Confissões – Arquidiocese de Londrina
 </header>
+<div class="busca-container">
+    <input type="text" id="busca" placeholder="Buscar paróquia..." onkeyup="filtrar()">
+</div>
 
 <main>
     {% for dia, lista in dias.items() %}
